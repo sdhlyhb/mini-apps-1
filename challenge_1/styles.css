@@ -1,0 +1,22 @@
+body {background-color: lightpink;}
+
+
+    .board {
+      display: inline-grid;
+      grid-template-rows: 100px 100px 100px;
+      grid-template-columns: 100px 100px 100px;
+      grid-gap: 3px;
+
+    }
+    .box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 3em;
+      background: white;
+      border: 1px solid gray;
+      border-radius: 5px;
+      position: relative;
+      text-align: center;
+      cursor: pointer;
+    }
