@@ -2,6 +2,8 @@ body {background-color: lightpink;}
 
 
     .board {
+      position: relative;
+      padding-left: 40%;
       display: inline-grid;
       grid-template-rows: 100px 100px 100px;
       grid-template-columns: 100px 100px 100px;
@@ -20,6 +22,16 @@ body {background-color: lightpink;}
       text-align: center;
       cursor: pointer;
     }
+
+
+    .winning-message {
+      position: relative;
+      padding-top: 10px;
+      padding-left: 40%;
+    }
+
+
+
 
     #winningMsgText {
       font-size: 20px;
