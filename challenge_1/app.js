@@ -19,15 +19,20 @@ let map2 = new Map(); //indexes for move_O player;
 
 var makeMove = function(event) {
   console.log('a move is made!!!');
-  event.target.innerText = currentPlayer;
+  if(event.target.innerText === '') {
+    event.target.innerText = currentPlayer;
+  }
+
   totalMoves++;
   if(currentPlayer === move_X) {
     map1.set(event.target.id, true);
+    disableMoveInCurBox(event.target.id);
     console.log('map1:', map1);
     checkWinner();
     currentPlayer = move_O;
   } else {
     map2.set(event.target.id, true);
+    disableMoveInCurBox(event.target.id);
     console.log('map2:', map2);
     checkWinner();
     currentPlayer = move_X;
@@ -40,6 +45,20 @@ var startingBoard = function() {
 
   boxes.forEach(box => {
     box.addEventListener('click', makeMove);
+  });
+
+};
+
+var disableMoveInCurBox = function(id) {
+
+    boxes[id].removeEventListener('click', makeMove);
+
+};
+
+var disableMoves = function() {
+
+  boxes.forEach(box => {
+    box.removeEventListener('click', makeMove);
   });
 
 };
@@ -61,7 +80,8 @@ var checkWinner = function() {
           console.log('Player 1 wins!!!');
           player1Wins = true;
           winningMsgText.innerText = 'Player 1 Wins!!!!!';
-          //return 'Player1';
+          disableMoves();
+
         }
       }
       if(!player1Wins) {
@@ -70,7 +90,7 @@ var checkWinner = function() {
             console.log('Player 2 wins!!!');
             player2Wins = true;
             winningMsgText.innerText = 'Player 2 Wins!!!!!';
-          //return 'Player2';
+            disableMoves();
           }
         }
       }
@@ -79,6 +99,7 @@ var checkWinner = function() {
     if (totalMoves === 9 && (!player1Wins && !player2Wins)) {
       console.log('It is a Draw!!!!');
       winningMsgText.innerText = 'Board is full !!! It is a Draw!!!!';
+      disableMoves();
 
     }
 
@@ -91,6 +112,7 @@ var restartGame = function(){
   setTimeout(() =>{
     boxes.forEach(box => {
       box.innerText = '';
+      box.addEventListener('click', makeMove);
     });
     currentPlayer = move_X;
     totalMoves = 0;
