@@ -25,12 +25,14 @@ var makeMove = function(event) {
 
   totalMoves++;
   if(currentPlayer === move_X) {
+    event.target.style.color = 'red';
     map1.set(event.target.id, true);
     disableMoveInCurBox(event.target.id);
     console.log('map1:', map1);
     checkWinner();
     currentPlayer = move_O;
   } else {
+    event.target.style.color = 'blue';
     map2.set(event.target.id, true);
     disableMoveInCurBox(event.target.id);
     console.log('map2:', map2);
@@ -114,6 +116,7 @@ var restartGame = function(){
       box.innerText = '';
       box.addEventListener('click', makeMove);
     });
+    winningMsgText.innerText = "The Winner Is...???";
     currentPlayer = move_X;
     totalMoves = 0;
     map1 = new Map();

@@ -1,4 +1,28 @@
-body {background-color: lightpink;}
+    body {
+      background-color: lightpink;
+      font-family: 'Otomanopee One', sans-serif;
+
+    }
+
+    .title  {
+      position: relative;
+      padding-left: 43%;
+    }
+
+    .players  {
+      position: relative;
+      padding-left: 43%;
+    }
+
+    #player1  {
+      color: red;
+
+    }
+
+    #player2  {
+      color: blue;
+
+    }
 
 
     .board {
