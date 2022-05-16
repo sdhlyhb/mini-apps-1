@@ -1,11 +1,20 @@
+/* indexes on the board.
+[ 0, 1, 2,
+  3, 4, 5,
+  6, 7, 8 ]
+
+
+*/
+
+
 //alert('Welcome to Tic Tac Toe!!');
 let move_X = 'X';
 let move_O = 'O';
 let currentPlayer = move_X;
 let totalMoves = 0;
 const winningIndexCombo = ['012', '048', '036','147','258','246','345','678'];
-let arr1 = []; //indexes for move_X player;
-let arr2 = []; //indexes for move_O player;
+let map1 = new Map(); //indexes for move_X player;
+let map2 = new Map(); //indexes for move_O player;
 
 
 var makeMove = function(event) {
@@ -13,13 +22,13 @@ var makeMove = function(event) {
   event.target.innerText = currentPlayer;
   totalMoves++;
   if(currentPlayer === move_X) {
-    arr1.push(event.target.id);
-    console.log('arr1:', arr1.sort());
+    map1.set(event.target.id, true);
+    console.log('map1:', map1);
     checkWinner();
     currentPlayer = move_O;
   } else {
-    arr2.push(event.target.id);
-    console.log('arr2:', arr2.sort());
+    map2.set(event.target.id, true);
+    console.log('map2:', map2);
     checkWinner();
     currentPlayer = move_X;
   }
@@ -36,23 +45,43 @@ var startingBoard = function() {
 };
 
 var checkWinner = function() {
-  if(totalMoves >= 5 && totalMoves <=9) {
-    var str1 = arr1.sort().join();
-    var str2 = arr2.sort().join();
-    for(var i = 0; i < winningIndexCombo.length; i++) {
-      if(isSubset(str1, winningIndexCombo[i])) {
-        console.log('Player 1 wins!!!');
-        return 'Player1';
-      } else if (isSubset(str2, winningIndexCombo[i])) {
-        console.log('player 2 wins!!!!');
-        return 'Player2';
+  let player1Wins = false;
+  let player2Wins = false;
+
+
+  if (totalMoves < 5 ) {
+    console.log('No Winner Yet!!');
+    winningMsgText.innerText = 'No Winner Yet!!';
+  }
+
+  if(totalMoves >= 5 && totalMoves <=9 ) { //before 5 moves no one will win, after 9 moves the board is full;
+
+      for(var i = 0; i < winningIndexCombo.length; i++) {
+        if(isSubset(map1, winningIndexCombo[i])) {
+          console.log('Player 1 wins!!!');
+          player1Wins = true;
+          winningMsgText.innerText = 'Player 1 Wins!!!!!';
+          //return 'Player1';
+        }
       }
+      if(!player1Wins) {
+        for(var i = 0; i < winningIndexCombo.length; i++) {
+          if(isSubset(map2, winningIndexCombo[i])) {
+            console.log('Player 2 wins!!!');
+            player2Wins = true;
+            winningMsgText.innerText = 'Player 2 Wins!!!!!';
+          //return 'Player2';
+          }
+        }
+      }
+
+    }
+    if (totalMoves === 9 && (!player1Wins && !player2Wins)) {
+      console.log('It is a Draw!!!!');
+      winningMsgText.innerText = 'Board is full !!! It is a Draw!!!!';
+
     }
 
-
-
-  }
-  console.log('no winner!!');
 }
 
 
@@ -64,8 +93,9 @@ var restartGame = function(){
       box.innerText = '';
     });
     currentPlayer = move_X;
-    arr1 = [];
-    arr2 = [];
+    totalMoves = 0;
+    map1 = new Map();
+    map2 = new Map();
   }, 500);
 };
 
@@ -74,10 +104,10 @@ restartGame();
 startingBoard();
 
 
-//helperFunction: baseStr.length >= sub.length(3 digits str in this case);
-var isSubset = function(base, sub) {
+//helperFunction:
+var isSubset = function(map, sub) {
   for(var i = 0; i < sub.length; i++) {
-    if(!base.includes(sub[i])){
+    if(!map.has(sub[i])){
       return false;
     }
   }
