@@ -1,2 +1,2 @@
-alert('Welcome to challenge 2!');
+//alert('Welcome to challenge 2!');
 
