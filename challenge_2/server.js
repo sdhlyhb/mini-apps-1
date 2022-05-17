@@ -2,18 +2,30 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const bodyParser = require('body-parser');
+const helperFns = require('./helperFns');
+
+const jsonToCsv = helperFns.jsonToCsv;
 
 
-app.use(express.static('client'));
+app.use('/', express.static('client'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 
-app.post('/', (req, res)=> {
+app.post('/upload_json', (req, res)=> {
 
-  console.log('this is req.body:', req.body);
+
+var data = jsonToCsv(JSON.parse(req.body.inputJSON));
+console.log(data);
+  res.send(data);
+
+
+
+
 
 });
+
+
 
 
 
