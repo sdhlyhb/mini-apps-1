@@ -1,0 +1,37 @@
+
+<html>
+  <head>
+    <title>CSV Report Generator</title>
+
+
+
+  </head>
+
+  <body>
+  <h1>CSV Report Generator</h1>
+
+  <form class="input-form" method="POST" action="/">
+    <label>Input JSON</label><br>
+    <textarea placeholder="Enter your JSON here..." rows = "10" cols = "100" name = "inputJSON" ></textarea><br>
+    <input type="submit" value="Submit" >
+
+  </form>
+
+  <div id="cvsReport">
+    <h2>Your CSV Report will be generated here:</h2>
+
+
+      <textarea rows = "10" cols = "100" name = "inputJSON" ><%= data%></textarea><br>
+
+
+  </div>
+
+
+
+
+
+  <script src = 'app.js'></script>
+
+  </body>
+</html>
+

@@ -7,14 +7,16 @@
   </head>
 
   <body>
-  <h1>CSV Report Generator</h1>
+  <h1>CSV Report Generator HTML template</h1>
 
-  <form class="input-form" method="POST" action="/upload_json">
+  <form class="input-form" method="POST" action="/csv_result">
     <label>Input JSON</label><br>
     <textarea placeholder="Enter your JSON here..." rows = "5" cols = "60" name = "inputJSON" ></textarea><br>
-    <input type="submit" value="Submit">
+    <input type="submit" value="Submit" >
 
   </form>
+
+  <p><span id="cvsReport"></span></p>
 
 
 

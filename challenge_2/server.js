@@ -7,17 +7,29 @@ const helperFns = require('./helperFns');
 const jsonToCsv = helperFns.jsonToCsv;
 
 
-app.use('/', express.static('client'));
+// app.use('/', express.static('client'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.set('view engine', 'ejs');
 
 
-app.post('/upload_json', (req, res)=> {
+
+app.get('/', (req, res) => {
+
+  res.render('index', {data: ''});
+
+});
+
+
+
+
+app.post('/', (req, res)=> {
 
 
 var data = jsonToCsv(JSON.parse(req.body.inputJSON));
 console.log(data);
-  res.send(data);
+res.render('index', {data:data});
+// res.send(data);
 
 
 
