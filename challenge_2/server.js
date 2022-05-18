@@ -6,14 +6,16 @@ const port = 3000;
 const bodyParser = require('body-parser');
 const helperFns = require('./helperFns');
 const fs = require('fs');
+const path = require('path');
 
 const jsonToCsv = helperFns.jsonToCsv;
 
 
-// app.use('/', express.static('client'));
+;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.set('view engine', 'ejs');
+app.use('/client', express.static(path.join(__dirname,'client')));
 
 
 
