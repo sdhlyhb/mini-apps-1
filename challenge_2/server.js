@@ -38,18 +38,30 @@ app.get('/', (req, res) => {
 // });
 
 
+
 app.post('/', upload.single('uploaded_file'),  function(req, res){
-  console.log('this is the file:', req.file);
-  fs.readFile(req.file.path, "utf8", function(err, jsondata) {
-    if(err) {
-      console.log('Err Reading the uploaded file!');
-    } else {
-      //console.log('this is the jsondata:', jsondata);
-      var data = jsonToCsv(JSON.parse(jsondata));
-      res.render('index', {data:data});
+
+  if(!req.file && Object.keys(req.body)) {
+    var data = jsonToCsv(JSON.parse(req.body.inputJSON));
+    res.render('index', {data:data});
+
+  }
+
+  else if(req.file) {
+    console.log('this is the file:', req.file);
+    fs.readFile(req.file.path, "utf8", function(err, jsondata) {
+      if(err) {
+        console.log('Err Reading the uploaded file!');
+      } else {
+        //console.log('this is the jsondata:', jsondata);
+        var data = jsonToCsv(JSON.parse(jsondata));
+        res.render('index', {data:data});
 
     }
   })
+}
+
+
 
 
 });
