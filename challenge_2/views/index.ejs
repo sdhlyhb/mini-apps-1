@@ -10,10 +10,11 @@
   <body>
   <h1>CSV Report Generator</h1>
 
-  <form class="input-form" method="POST" action="/">
+  <form class="input-form" method="POST" action="/" enctype="multipart/form-data" >
     <label>Input JSON</label><br>
-    <textarea placeholder="Enter your JSON here..." rows = "10" cols = "100" name = "inputJSON" ></textarea><br>
-    <input type="submit" value="Submit" >
+    <!-- <textarea placeholder="Enter your JSON here..." rows = "10" cols = "100" name = "inputJSON" ></textarea><br> -->
+    Or upload a JSON file: <input type="file" name="uploaded_file" />
+    <input type="submit" value="Submit" />
 
   </form>
 
