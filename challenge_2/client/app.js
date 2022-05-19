@@ -2,6 +2,7 @@
 // alert('Welcome to challenge 2!');
 
 $(document).ready(function() {
+  // form submittion functions:
   $('#form').on('submit', function(e){
     e.preventDefault();
     var formData = new FormData($(this)[0]);
@@ -20,18 +21,18 @@ $(document).ready(function() {
         $('#csvResult').text(respose);
         $('#downloadLink').text('Download your csv report');
         $('#downloadLink').css({'background-color': 'yellow'});
-
-
+        $('#downloadLink').attr({'href': 'csvReports'});
+        $('#downloadLink').attr({'download': 'csvReport.csv'});
       },
       error: function(err) {
         console.log('Error submitting!!!', err);
         $('#csvResult').text('ERROR: Can not get csv result!');
-      }
-
-    })
-
-
+        }
+      })
     });
+
+
+
 
 
  });

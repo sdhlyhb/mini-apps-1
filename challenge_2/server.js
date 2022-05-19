@@ -18,13 +18,24 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use('/', express.static(path.join(__dirname,'client')));
 
 
+
+
+
 app.post('/upload_json', upload.single('uploaded_file'), (req, res) => {
   console.log('this is json post req:', req.body);
+  var csv_dest = path.join(__dirname, 'csvReports');
 
   if(!req.file && Object.keys(req.body)) {
     console.log('this is req.body', req.body, typeof(req.body));
     var data = jsonToCsv(JSON.parse(req.body.inputJSON));
     console.log('this is the csv data:', data);
+    fs.writeFile(csv_dest + '/csvReport.csv', data, (err) => {
+      if(err) {
+        console.log('Error writing the csv report!', err);
+      } else {
+        console.log('Successful writing the csv report!');
+      }
+    });
     res.send(data);
 
   }
@@ -36,12 +47,35 @@ app.post('/upload_json', upload.single('uploaded_file'), (req, res) => {
       } else {
         //console.log('this is the jsondata:', jsondata);
         var data = jsonToCsv(JSON.parse(jsondata));
+        fs.writeFile(csv_dest + '/csvReport.csv', data, (err) => {
+          if(err) {
+            console.log('Error writing the csv report!', err);
+          } else {
+            console.log('Successful writing the csv report!');
+          }
+        });
         res.send(data);
 
     }
   })
 }
 
+
+
+});
+
+
+app.get('/csvReports', (req, res) => {
+  var csv_dest = path.join(__dirname, 'csvReports');
+
+  fs.readFile(csv_dest + '/csvReport.csv', 'utf8', function(err, csvData){
+    if(err) {
+      console.log('Error reading the data!');
+    } else {
+      console.log('Sucess!');
+      res.send(csvData);
+    }
+  });
 
 
 });
