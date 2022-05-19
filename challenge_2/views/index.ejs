@@ -3,33 +3,27 @@
   <head>
     <title>CSV Report Generator</title>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-
-
-
   </head>
 
   <body>
   <h1>CSV Report Generator EJS PAGE</h1>
 
-  <form class="input-form" method="POST" action="/" enctype="multipart/form-data" >
+  <form class="input-form" id="form" method="POST" action="/upload_json" enctype="multipart/form-data" >
     <label>Input JSON</label><br>
-    <textarea placeholder="Enter your JSON here..." rows = "10" cols = "100" name = "inputJSON" ></textarea><br>
+    <textarea placeholder="Enter your JSON here..." rows = "10" cols = "100" id="inputJSON" name = "inputJSON" ></textarea><br>
     Or upload a JSON file: <input id ="uploadBox" type="file" name="uploaded_file" />
     <input type="submit" value="Submit" />
 
   </form>
 
-  <div id="cvsReport">
+  <div id="csvReport">
     <h2>Your CSV Report will be generated here:</h2>
 
 
-      <textarea rows = "10" cols = "100" name = "inputJSON" ><%= data%></textarea><br>
+      <textarea rows = "10" cols = "100" name = "csvResult" id="csvResult"><%= data%></textarea><br>
 
 
   </div>
-
-
-
 
 
   <script src = 'client/app.js'></script>

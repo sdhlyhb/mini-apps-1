@@ -1,36 +1,46 @@
 
-//alert('Welcome to challenge 2!');
+// alert('Welcome to challenge 2!');
 
-$(document).ready(function(){
-
-  $('input-form').on('submit', function(e){
+$(document).ready(function() {
+  $('#form').on('submit', function(e){
     e.preventDefault();
-    // ... more event handler code here
+    var formData = new FormData($(this)[0]);
+    console.log('this is formdata:', formData);
+
+
+  // var formData = {};
+  // var input = $('#form').serializeArray();
+  // // console.log('this is input', input);
+  // formData[input[0].name] = input[0].value;
+  // // console.log('this is formdata:', formData);
+
     $.ajax({
 
-      url:'/',
-      data: {"data": "this is a test data"},
+      url:'upload_json',
+      data: formData,
       type: 'POST',
-      dataType: 'json',
-      success: function (e) {
-        console.log(JSON.stringify(e));
+      enctype: 'multipart/form-data',
+      processData: false,
+      contentType: false,
+      success: function(respose) {
+        console.log('success!!!!', respose);
+        $('#csvResult').text(respose);
       },
-
-
-      error: function(e) {
-        console.log('ERROR SUBMITTING,', JSON.stringify(e));
+      error: function(err) {
+        console.log('Error submitting!!!', err);
+        $('#csvResult').text('ERROR: Can not get csv result!');
       }
+
+    })
 
 
     });
 
 
-  });
+ });
 
 
 
 
 
 
-
-});

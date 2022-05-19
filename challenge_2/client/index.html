@@ -10,20 +10,25 @@
   <body>
   <h1>CSV Report Generator HTML PAGE</h1>
 
-  <form class="input-form" method="POST" action="/csv_result">
+  <form class="input-form" id="form" method="POST" action="/upload_json" enctype="multipart/form-data" >
     <label>Input JSON</label><br>
-    <textarea placeholder="Enter your JSON here..." rows = "5" cols = "60" name = "inputJSON" ></textarea><br>
-    <input type="submit" value="Submit" >
+    <textarea placeholder="Enter your JSON here..." rows = "10" cols = "100" id="inputJSON" name = "inputJSON" ></textarea><br>
+    Or upload a JSON file: <input id ="uploadBox" type="file" name="uploaded_file" />
+    <input type="submit" value="Submit" />
 
   </form>
 
-  <p><span id="cvsReport"></span></p>
+  <div id="csvReport">
+    <h2>Your CSV Report will be generated here:</h2>
 
 
+      <textarea rows = "10" cols = "100" name = "csvResult" id="csvResult"></textarea><br>
 
 
+  </div>
 
-  <script src = 'app.js'></script>
+
+  <script src = '/app.js'></script>
 
   </body>
 </html>

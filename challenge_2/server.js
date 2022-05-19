@@ -11,45 +11,24 @@ const path = require('path');
 const jsonToCsv = helperFns.jsonToCsv;
 
 
-;
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-app.set('view engine', 'ejs');
-app.use('/client', express.static(path.join(__dirname,'client')));
+//app.set('view engine', 'ejs');
+app.use('/', express.static(path.join(__dirname,'client')));
 
 
-
-app.get('/', (req, res) => {
-
-  res.render('index', {data: ''});
-
-});
-
-
-
-/**********working code for input JSON in the testArea*************************/
-// app.post('/', (req, res)=> {
-
-
-// var data = jsonToCsv(JSON.parse(req.body.inputJSON));
-// console.log(data);
-// res.render('index', {data:data});
-// // res.send(data);
-
-
-// });
-
-
-
-app.post('/', upload.single('uploaded_file'),  function(req, res){
+app.post('/upload_json', upload.single('uploaded_file'), (req, res) => {
+  console.log('this is json post req:', req.body);
 
   if(!req.file && Object.keys(req.body)) {
+    console.log('this is req.body', req.body, typeof(req.body));
     var data = jsonToCsv(JSON.parse(req.body.inputJSON));
-    res.render('index', {data:data});
+    console.log('this is the csv data:', data);
+    res.send(data);
 
   }
-
-  else if(req.file) {
+    else if(req.file) {
     console.log('this is the file:', req.file);
     fs.readFile(req.file.path, "utf8", function(err, jsondata) {
       if(err) {
@@ -57,7 +36,7 @@ app.post('/', upload.single('uploaded_file'),  function(req, res){
       } else {
         //console.log('this is the jsondata:', jsondata);
         var data = jsonToCsv(JSON.parse(jsondata));
-        res.render('index', {data:data});
+        res.send(data);
 
     }
   })
@@ -65,8 +44,42 @@ app.post('/', upload.single('uploaded_file'),  function(req, res){
 
 
 
-
 });
+
+
+
+
+
+/**********working code for input JSON in the testArea using EJS *************************/
+
+// app.post('/', upload.single('uploaded_file'),  function(req, res){
+
+//   if(!req.file && Object.keys(req.body)) {
+//     console.log('this is req.body', req.body, typeof(req.body));
+//     var data = jsonToCsv(JSON.parse(req.body.inputJSON));
+//     console.log('this is the csv data:', data);
+//     res.render('index', {data:data});
+
+//   }
+
+//   else if(req.file) {
+//     console.log('this is the file:', req.file);
+//     fs.readFile(req.file.path, "utf8", function(err, jsondata) {
+//       if(err) {
+//         console.log('Err Reading the uploaded file!');
+//       } else {
+//         //console.log('this is the jsondata:', jsondata);
+//         var data = jsonToCsv(JSON.parse(jsondata));
+//         res.render('index', {data:data});
+
+//     }
+//   })
+// }
+
+
+
+
+// });
 
 
 
