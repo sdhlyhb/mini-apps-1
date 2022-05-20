@@ -1,13 +1,3 @@
-/*
-firstName,lastName,county,city,role,sales
-Joshie,Wyattson,San Mateo,San Mateo,Broker,1000000
-Beth Jr.,Johnson,San Mateo,Pacifica,Manager,2900000
-Smitty,Won,San Mateo,Redwood City,Sales Person,4800000
-Allen,Price,San Mateo,Burlingame,Sales Person,2500000
-Beth,Johnson,San Francisco,San Francisco,Broker/Sales Person,7500000
-
-*/
-
 
 
 var jsonToCsv = function(jsonObj) {
@@ -64,5 +54,26 @@ return finalCSV;
 
 
 }
+
+
+// csv file to table format
+
+// var csvToTableHtml = function(csvData) {
+//   var rows = csvData.split('\r\n');
+//   var html = '<table border = "1">';
+//   rows.forEach((data, index) => {
+//     html += '<tr>';
+//     var value = data.split(',');
+//     var len = value.length;
+//     for(var i = 0; i < len; i++) {
+//       html += "<td>" + value[i] + "</td>";
+//     }
+//     html += '</tr>';
+//   });
+//   html += '</table>';
+
+//   return html;
+// }
+
 
 exports.jsonToCsv = jsonToCsv;

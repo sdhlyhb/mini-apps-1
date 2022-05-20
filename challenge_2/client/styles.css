@@ -1,0 +1,37 @@
+h1, h2{
+  font-family: 'Koulen', cursive;
+  color: #456268;
+  padding-left: 1rem;
+}
+
+#form {
+  padding-left: 1rem;
+}
+
+#csvReport {
+  padding-left: 1rem;
+  padding-top: 2rem;
+}
+
+
+body {
+  background-color: #FDFCE5;
+  font-family: 'Roboto', sans-serif;
+}
+
+
+#csv-table {
+  width: 50%;
+  border-collapse: collapse;
+
+}
+
+
+
+#csv-table td {
+  border: 2px solid #C9CCD5;
+  padding: 8px;
+}
+
+#csv-table tr:nth-child(even){background-color: #F9F3DF;}
+
