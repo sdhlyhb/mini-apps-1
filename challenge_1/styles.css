@@ -9,19 +9,39 @@
       padding-left: 43%;
     }
 
-    .players  {
-      position: relative;
-      padding-left: 43%;
+    #stats {
+      width: 20%;
+      padding-left: 40%;
+    }
+    #stats div {
+      font-size:1em;
+
+      display:inline-block;
+      text-align:center;
+
+      padding: 20px;
+    }
+    .stats-square {
+      width:3rem;
+      height:1.5rem;
     }
 
-    #player1  {
+
+    #stats table tr td {
+      font-size:1rem;
+      padding: 1rem;
+      white-space:nowrap;
+      border-collapse: separate;
+    }
+    #stats table tr th {
+      font-style:italic;
+    }
+
+    #player1-stats {
       color: red;
-
     }
-
-    #player2  {
+    #player2-stats {
       color: blue;
-
     }
 
 

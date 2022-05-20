@@ -15,15 +15,29 @@
 
     </div>
 
-    <div class="players">
-      <div id = "player1" >
-        <h2>Player1: X </h2>
-      </div>
-
-      <div id = "player2">
-        <h2>Player2: O </h2>
-      </div>
-
+    <div id="stats">
+      <table>
+        <thead>
+          <tr>
+            <th class="stats-square"></th>
+            <th class="stats-square">Win</th>
+            <th class="stats-square">Lose</th>
+            <th class="stats-square">Draw</th>
+          </tr>
+        </thead>
+        <tr id="player1-stats">
+          <td class="stats-square" id="player1-symbol">player1: X</td>
+          <td class="stats-square" id="player1-win">0</td>
+          <td class="stats-square" id="player1-lose">0</td>
+          <td class="stats-square" id="player1-draw">0</td>
+        </tr>
+        <tr id="player2-stats">
+          <td class="stats-square" id="player2-symbol">Player2: O</td>
+          <td class="stats-square" id="player2-win">0</td>
+          <td class="stats-square" id="player2-lose">0</td>
+          <td class="stats-square" id="player2-draw">0</td>
+        </tr>
+      </table>
     </div>
 
 
