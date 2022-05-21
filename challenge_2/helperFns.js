@@ -5,6 +5,7 @@ var jsonToCsv = function(jsonObj) {
   let allLines = [];
   let flattened = [];
   let finalCSV = '';
+  var id = 0;
 
 
 //helper function: (kind of ) flatten nested objs
@@ -30,7 +31,7 @@ var jsonToCsv = function(jsonObj) {
 
 flattenObjs(jsonObj);
 
-allLines.push(keywords.join(',')); //add the header: keywords;
+allLines.push(['ID'].concat(keywords).join(',')); //add the header: keywords;
 
 flattened.map(ele => {
   for(var key in ele) {
@@ -43,8 +44,9 @@ flattened.map(ele => {
 });
 
 flattened.forEach(ele => {
+   id++;
   var curValues = Object.values(ele);
-  allLines.push(curValues.join(','));
+  allLines.push(id + ',' + curValues.join(',') );
 })
 
 
@@ -55,25 +57,22 @@ return finalCSV;
 
 }
 
-
-// csv file to table format
-
-// var csvToTableHtml = function(csvData) {
-//   var rows = csvData.split('\r\n');
-//   var html = '<table border = "1">';
-//   rows.forEach((data, index) => {
-//     html += '<tr>';
-//     var value = data.split(',');
-//     var len = value.length;
-//     for(var i = 0; i < len; i++) {
-//       html += "<td>" + value[i] + "</td>";
-//     }
-//     html += '</tr>';
-//   });
-//   html += '</table>';
-
-//   return html;
-// }
-
-
 exports.jsonToCsv = jsonToCsv;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
