@@ -15,6 +15,8 @@ let totalMoves = 0;
 const winningIndexCombo = ['012', '048', '036','147','258','246','345','678'];
 let map1 = new Map(); //indexes for move_X player;
 let map2 = new Map(); //indexes for move_O player;
+let player1Stats = {win: 0, lose:0, draw:0};
+let player2Stats = {win: 0, lose:0, draw:0};
 
 
 var makeMove = function(event) {
@@ -65,6 +67,27 @@ var disableMoves = function() {
 
 };
 
+
+
+var updateStats = function() {
+  var player1Win = document.getElementById('player1-win');
+  var player1Lose = document.getElementById('player1-lose');
+  var player1Draw = document.getElementById('player1-draw');
+  var player2Win = document.getElementById('player2-win');
+  var player2Lose = document.getElementById('player2-lose');
+  var player2Draw = document.getElementById('player2-draw');
+
+
+  player1Win.innerText = player1Stats.win + '';
+  player1Lose.innerText = player1Stats.lose + '';
+  player1Draw.innerText = player1Stats.draw + '';
+  player2Win.innerText = player2Stats.win + '';
+  player2Lose.innerText = player2Stats.lose + '';
+  player2Draw.innerText = player2Stats.draw + '';
+
+};
+
+
 var checkWinner = function() {
   let player1Wins = false;
   let player2Wins = false;
@@ -81,7 +104,12 @@ var checkWinner = function() {
         if(isSubset(map1, winningIndexCombo[i])) {
           console.log('Player 1 wins!!!');
           player1Wins = true;
-          winningMsgText.innerText = 'Player 1 Wins!!!!!';
+          player1Stats.win++;
+          player2Stats.lose++;
+          winningMsgText.innerText = '🎉🤩Player 1 Wins!!!!!';
+          updateStats();
+
+
           disableMoves();
 
         }
@@ -91,7 +119,11 @@ var checkWinner = function() {
           if(isSubset(map2, winningIndexCombo[i])) {
             console.log('Player 2 wins!!!');
             player2Wins = true;
-            winningMsgText.innerText = 'Player 2 Wins!!!!!';
+            player2Stats.win++;
+            player1Stats.lose++;
+            winningMsgText.innerText = '🎊😆Player 2 Wins!!!!!';
+            updateStats();
+
             disableMoves();
           }
         }
@@ -100,13 +132,22 @@ var checkWinner = function() {
     }
     if (totalMoves === 9 && (!player1Wins && !player2Wins)) {
       console.log('It is a Draw!!!!');
-      winningMsgText.innerText = 'Board is full !!! It is a Draw!!!!';
+      player1Stats.draw++;
+      player2Stats.draw++;
+      winningMsgText.innerText = '😜Board is full !!! It is a Draw!!!!';
+      updateStats();
+
       disableMoves();
 
     }
 
 }
 
+var clearStats = function() {
+    player1Stats = {win: 0, lose:0, draw:0};
+    player2Stats = {win: 0, lose:0, draw:0};
+    updateStats();
+};
 
 
 //restart game will empty the board and make the first move back to X.
@@ -116,15 +157,18 @@ var restartGame = function(){
       box.innerText = '';
       box.addEventListener('click', makeMove);
     });
-    winningMsgText.innerText = "The Winner Is...???";
+    winningMsgText.innerText = "🤔The Winner Is...???";
     currentPlayer = move_X;
     totalMoves = 0;
     map1 = new Map();
     map2 = new Map();
+
   }, 500);
 };
 
 resetBtn.addEventListener('click', restartGame);
+clear.addEventListener('click', clearStats);
+
 restartGame();
 startingBoard();
 

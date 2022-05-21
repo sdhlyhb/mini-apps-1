@@ -1,10 +1,11 @@
     body {
-      background-color: lightpink;
+      background-color: #F4BFBF;
       font-family: 'Otomanopee One', sans-serif;
 
     }
 
     .title  {
+      color: #0A1D37;
       position: relative;
       padding-left: 43%;
     }
@@ -18,8 +19,6 @@
 
       display:inline-block;
       text-align:center;
-
-      padding: 20px;
     }
     .stats-square {
       width:3rem;
@@ -29,7 +28,7 @@
 
     #stats table tr td {
       font-size:1rem;
-      padding: 1rem;
+      padding: 0.8rem;
       white-space:nowrap;
       border-collapse: separate;
     }
@@ -47,7 +46,7 @@
 
     .board {
       position: relative;
-      padding-left: 40%;
+      padding-left: 42%;
       display: inline-grid;
       grid-template-rows: 100px 100px 100px;
       grid-template-columns: 100px 100px 100px;
@@ -71,7 +70,7 @@
     .winning-message {
       position: relative;
       padding-top: 10px;
-      padding-left: 40%;
+      padding-left: 42%;
     }
 
 
@@ -79,5 +78,5 @@
 
     #winningMsgText {
       font-size: 20px;
-      font-style: italic;
+
     }

@@ -11,22 +11,22 @@
 
   <body>
     <div class = "title">
-    <h1>Tic Tac Toe</h1>
+    <h1>❌ Tic Tac Toe 😊 </h1>
 
     </div>
 
     <div id="stats">
-      <table>
-        <thead>
-          <tr>
-            <th class="stats-square"></th>
-            <th class="stats-square">Win</th>
-            <th class="stats-square">Lose</th>
-            <th class="stats-square">Draw</th>
-          </tr>
-        </thead>
+      <table id="stats-table">
+
+        <tr>
+          <th class="stats-square"></th>
+          <th class="stats-square">Win</th>
+          <th class="stats-square">Lose</th>
+          <th class="stats-square">Draw</th>
+        </tr>
+
         <tr id="player1-stats">
-          <td class="stats-square" id="player1-symbol">player1: X</td>
+          <td class="stats-square" id="player1-symbol">Player1: X</td>
           <td class="stats-square" id="player1-win">0</td>
           <td class="stats-square" id="player1-lose">0</td>
           <td class="stats-square" id="player1-draw">0</td>
@@ -54,8 +54,9 @@
 
      </div>
      <div class="winning-message" id="winningMessage">
-       <div id="winningMsgText">The Winner Is...???</div>
+       <div id="winningMsgText">🤔The Winner Is...???</div>
        <button id="resetBtn">Restart</button>
+       <button id="clear">Clear Stats</button>
      </div>
 
 
