@@ -1,11 +1,12 @@
 
 
-var jsonToCsv = function(jsonObj) {
+var jsonToCsv = function(jsonObj, filteredContent) {
   var keywords = Object.keys(jsonObj).filter(ele => Array.isArray(jsonObj[ele]) === false);
   let allLines = [];
   let flattened = [];
   let finalCSV = '';
   var id = 0;
+  var filteredContent = '' || filteredContent;
 
 
 //helper function: (kind of ) flatten nested objs
@@ -31,7 +32,7 @@ var jsonToCsv = function(jsonObj) {
 
 flattenObjs(jsonObj);
 
-allLines.push(['ID'].concat(keywords).join(',')); //add the header: keywords;
+
 
 flattened.map(ele => {
   for(var key in ele) {
@@ -44,13 +45,22 @@ flattened.map(ele => {
 });
 
 flattened.forEach(ele => {
-   id++;
+  id++;
+
   var curValues = Object.values(ele);
+
   allLines.push(id + ',' + curValues.join(',') );
 })
 
+if(!filteredContent.length) {
+  var filtered = allLines;
+} else {
+  filtered = allLines.filter(line => line.includes(filteredContent) === false);
+}
 
-finalCSV = allLines.join('\r\n');
+filtered.unshift(['ID'].concat(keywords).join(',')); //add the header: keywords;
+
+finalCSV = filtered.join('\r\n');
 
 return finalCSV;
 

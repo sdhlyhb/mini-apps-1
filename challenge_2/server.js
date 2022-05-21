@@ -27,7 +27,7 @@ app.post('/upload_json', upload.single('uploaded_file'), (req, res) => {
 
   if(!req.file && Object.keys(req.body)) {
     console.log('this is req.body', req.body, typeof(req.body));
-    var data = jsonToCsv(JSON.parse(req.body.inputJSON));
+    var data = jsonToCsv(JSON.parse(req.body.inputJSON), req.body.filterContent);
     console.log('this is the csv data:', data);
     fs.writeFile(csv_dest + '/csvReport.csv', data, (err) => {
       if(err) {
@@ -46,7 +46,7 @@ app.post('/upload_json', upload.single('uploaded_file'), (req, res) => {
         console.log('Err Reading the uploaded file!');
       } else {
         //console.log('this is the jsondata:', jsondata);
-        var data = jsonToCsv(JSON.parse(jsondata));
+        var data = jsonToCsv(JSON.parse(jsondata), req.body.filterContent);
         fs.writeFile(csv_dest + '/csvReport.csv', data, (err) => {
           if(err) {
             console.log('Error writing the csv report!', err);
