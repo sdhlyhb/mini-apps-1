@@ -11,6 +11,7 @@
 let move_X = 'X';
 let move_O = 'O';
 let currentPlayer = move_X;
+let currentWinner = move_X;
 let totalMoves = 0;
 const winningIndexCombo = ['012', '048', '036','147','258','246','345','678'];
 let map1 = new Map(); //indexes for move_X player;
@@ -106,8 +107,9 @@ var checkWinner = function() {
           player1Wins = true;
           player1Stats.win++;
           player2Stats.lose++;
-          winningMsgText.innerText = '🎉🤩Player 1 Wins!!!!!';
+          winningMsgText.innerText = '🎉🤩Player 1 Wins!! X will make first move on the next round!';
           updateStats();
+          currentWinner = move_X;
 
 
           disableMoves();
@@ -121,7 +123,8 @@ var checkWinner = function() {
             player2Wins = true;
             player2Stats.win++;
             player1Stats.lose++;
-            winningMsgText.innerText = '🎊😆Player 2 Wins!!!!!';
+            winningMsgText.innerText = '🎊😆Player 2 Wins!! O will make first move on the next round!';
+            currentWinner = move_O;
             updateStats();
 
             disableMoves();
@@ -158,7 +161,7 @@ var restartGame = function(){
       box.addEventListener('click', makeMove);
     });
     winningMsgText.innerText = "🤔The Winner Is...???";
-    currentPlayer = move_X;
+    currentPlayer = currentWinner;
     totalMoves = 0;
     map1 = new Map();
     map2 = new Map();
