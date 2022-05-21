@@ -107,7 +107,8 @@ var checkWinner = function() {
           player1Wins = true;
           player1Stats.win++;
           player2Stats.lose++;
-          winningMsgText.innerText = '🎉🤩Player 1 Wins!! X will make first move on the next round!';
+          var player1Name = document.getElementById('player1-symbol').innerText.split(':')[0];
+          winningMsgText.innerText = `🎉🤩${player1Name} Wins!! X will make first move on the next round!`;
           updateStats();
           currentWinner = move_X;
 
@@ -123,7 +124,8 @@ var checkWinner = function() {
             player2Wins = true;
             player2Stats.win++;
             player1Stats.lose++;
-            winningMsgText.innerText = '🎊😆Player 2 Wins!! O will make first move on the next round!';
+            var player2Name = document.getElementById('player2-symbol').innerText.split(':')[0];
+            winningMsgText.innerText = `🎊😆${player2Name} Wins!! O will make first move on the next round!`;
             currentWinner = move_O;
             updateStats();
 
@@ -169,9 +171,23 @@ var restartGame = function(){
   }, 500);
 };
 
+var changeName = function(e) {
+  var curName = e.target.innerText.split(':')[0];
+  var curSymbol = e.target.innerText.split(':')[1];
+  let name = prompt('input your name:', curName);
+  var text = name + ': ' + curSymbol;
+  e.target.innerText = text;
+
+}
+
+var player1Symbol = document.getElementById('player1-symbol');
+var player2Symbol = document.getElementById('player2-symbol');
+player1Symbol.addEventListener('click', changeName);
+player2Symbol.addEventListener('click', changeName);
+
+
 resetBtn.addEventListener('click', restartGame);
 clear.addEventListener('click', clearStats);
-
 restartGame();
 startingBoard();
 
