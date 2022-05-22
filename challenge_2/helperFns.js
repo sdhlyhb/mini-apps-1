@@ -54,13 +54,22 @@ flattened.forEach(ele => {
 
 if(!filteredContent.length) {
   var filtered = allLines;
+  var reOrdered = allLines;
 } else {
-  filtered = allLines.filter(line => line.includes(filteredContent) === false);
+  filtered = allLines.filter(line => line.toLowerCase().includes(filteredContent.toLowerCase()) === false);
+  var newId = 0;
+  reOrdered = filtered.map(line => {
+    newId++;
+    var arr = line.split(',');
+    arr.splice(0, 1);
+   return newId + ',' + arr.join(',');
+
+  });
 }
 
-filtered.unshift(['ID'].concat(keywords).join(',')); //add the header: keywords;
+reOrdered.unshift(['ID'].concat(keywords).join(',')); //add the header: keywords;
 
-finalCSV = filtered.join('\r\n');
+finalCSV = reOrdered.join('\r\n');
 
 return finalCSV;
 
