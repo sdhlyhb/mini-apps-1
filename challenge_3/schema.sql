@@ -1,0 +1,23 @@
+DROP DATABASE IF EXISTS orders;
+
+CREATE DATABASE orders;
+
+USE orders;
+
+CREATE TABLE orderInfo (
+  id INT NOT NULL AUTO_INCREMENT,
+  username VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  city VARCHAR(255) NOT NULL,
+  state VARCHAR(255) NOT NULL,
+  zipcode VARCHAR(255) NOT NULL,
+  phoneNumber VARCHAR(255) NOT NULL,
+  creditCardNumber VARCHAR(255) NOT NULL,
+  expiryDate DATE NOT NULL,
+  cvv VARCHAR(255) NOT NULL,
+  billingZip VARCHAR(255) NOT NULL,
+
+  PRIMARY KEY (id)
+
+
+)
