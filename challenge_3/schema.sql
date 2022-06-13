@@ -6,16 +6,17 @@ USE orders;
 
 CREATE TABLE orderInfo (
   id INT NOT NULL AUTO_INCREMENT,
-  username VARCHAR(255) NOT NULL,
-  password VARCHAR(255) NOT NULL,
-  city VARCHAR(255) NOT NULL,
-  state VARCHAR(255) NOT NULL,
-  zipcode VARCHAR(255) NOT NULL,
-  phoneNumber VARCHAR(255) NOT NULL,
-  creditCardNumber VARCHAR(255) NOT NULL,
-  expiryDate DATE NOT NULL,
-  cvv VARCHAR(255) NOT NULL,
-  billingZip VARCHAR(255) NOT NULL,
+  username VARCHAR(255) ,
+  email VARCHAR(255) ,
+  password VARCHAR(255) ,
+  city VARCHAR(255),
+  state VARCHAR(255),
+  zipcode VARCHAR(255),
+  phoneNumber VARCHAR(255),
+  creditCardNumber VARCHAR(255),
+  expiryDate DATE,
+  cvv VARCHAR(255) ,
+  billingZip VARCHAR(255) ,
 
   PRIMARY KEY (id)
 
