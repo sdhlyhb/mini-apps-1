@@ -34,7 +34,37 @@ app.post('/api/createId', (req, res) => {
 app.put('/api/user-account-info/:id', (req, res) => {
   console.log('this is req.body for post user-account-info:', req.body);
   let form1Data = req.body;
-  db.saveFrom1Data(form1Data, (err, response) => {
+  db.saveForm1Data(form1Data, (err, response) => {
+    if(err) {
+      console.log('Err POST', err);
+      res.status(500).send(err);
+    } else {
+      console.log('Sucess saved!', response);
+      res.status(200).send('Sucess!');
+    }
+  })
+
+})
+
+app.put('/api/shipping-info/:id', (req, res) => {
+  console.log('this is req.body for post shipping-info:', req.body);
+  let form2Data = req.body;
+  db.saveForm2Data(form2Data, (err, response) => {
+    if(err) {
+      console.log('Err POST', err);
+      res.status(500).send(err);
+    } else {
+      console.log('Sucess saved!', response);
+      res.status(200).send('Sucess!');
+    }
+  })
+
+})
+
+app.put('/api/billing-info/:id', (req, res) => {
+  console.log('this is req.body for post billing-info:', req.body);
+  let form3Data = req.body;
+  db.saveForm3Data(form2Data, (err, response) => {
     if(err) {
       console.log('Err POST', err);
       res.status(500).send(err);

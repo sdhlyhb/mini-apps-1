@@ -31,7 +31,7 @@ let createNewRecord = (callback) => {
 
 }
 
-let saveFrom1Data = (form1Data, callback) => {
+let saveForm1Data = (form1Data, callback) => {
   let username = form1Data.username;
   let email = form1Data.email;
   let password = form1Data.password;
@@ -49,17 +49,52 @@ let saveFrom1Data = (form1Data, callback) => {
     }
   })
 
+};
+
+let saveForm2Data = (form2Data, callback) => {
+  let line1 = form2Data.line1;
+  let line2 =form2Data.line2;
+  let city = form2Data.city;
+  let state = form2Data.state;
+  let zipcode = form2Data.zipcode;
+  let phoneNumber = form2Data.phoneNumber;
+  let id = form2Data.id;
+
+  let queryString = `UPDATE orderInfo SET line1 = "${line1}", line2 = "${line2}", city = "${city}", state = "${state}",zipcode = "${zipcode}",phoneNumber = "${phoneNumber}" WHERE id = ${id};`;
+
+  connection.query(queryString, (err, result) => {
+    if(err) {
+      console.log('Err save form2 data to db:', err);
+      callback(err, null);
+    } else {
+      console.log('Sucess save form2 data to db!');
+      callback(null, result);
+    }
+  })
 
 
 };
 
-// let saveFrom2Data = () => {
+let saveForm3Data = (form2Data, callback) => {
+  let creditCardNumber = form3Data.creditCardNumber;
+  let expiryDate =form3Data.expiryDate;
+  let cvv = form3Data.cvv;
+  let billingZip = form3Data.billingZip;
 
-// };
 
-// let saveFrom3Data = () => {
+  let queryString = `UPDATE orderInfo SET creditCardNumber = "${creditCardNumber}", expiryDate = "${expiryDate}", cvv = "${cvv}", billingZip = "${billingZip} WHERE id = ${id};`;
 
-// };
+  connection.query(queryString, (err, result) => {
+    if(err) {
+      console.log('Err save form2 data to db:', err);
+      callback(err, null);
+    } else {
+      console.log('Sucess save form3 data to db!');
+      callback(null, result);
+    }
+  })
+
+};
 
 let getOrderInfoById = (id, callback) => {
   let queryString = `SELECT * FROM orderInfo WHERE id = ${id}`;
@@ -82,7 +117,9 @@ let getOrderInfoById = (id, callback) => {
 module.exports = {
   createNewRecord,
   getOrderInfoById,
-  saveFrom1Data
+  saveForm1Data,
+  saveForm2Data,
+  saveForm3Data
 
 };
 

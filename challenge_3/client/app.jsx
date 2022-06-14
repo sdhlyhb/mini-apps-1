@@ -12,7 +12,6 @@ class App extends React.Component {
       f2Seen: false,
       f3Seen: false,
       summarySeen: false,
-      confirmationSeen: false,
       current_id: null
 
 
@@ -87,12 +86,20 @@ class App extends React.Component {
         {this.state.f1Seen? <F1
         cur_id = {this.state.current_id}
         toggleF1F2 = {this.hideF1ShowF2.bind(this)}
+        /> : null}
+        {this.state.f2Seen? <F2
+        cur_id = {this.state.current_id}
+        toggleF2F3 = {this.hideF2ShowF3.bind(this)}
 
 
         /> : null}
-        {this.state.f2Seen? <F2 /> : null}
-        {this.state.f3Seen? <F3 /> : null}
-        {this.state.confirmationSeen? <Comfirmation /> : null}
+        {this.state.f3Seen ? <F3
+          cur_id={this.state.current_id}
+          toggleF3Summary={this.hideF3ShowSummary.bind(this)}
+
+
+        /> : null}
+        {this.state.confirmationSeen ? <Comfirmation /> : null}
       </div>
     )
   }
@@ -155,7 +162,7 @@ class F1 extends React.Component {
           <input onChange = {this.onChangeName.bind(this)} ></input>
           <br />
           <label>Email:</label>
-          <input onChange = {this.onChangeEmail.bind(this)} ></input>
+          <input type="email" onChange = {this.onChangeEmail.bind(this)} ></input>
           <br />
           <label>Password:</label>
           <input onChange = {this.onChangePassword.bind(this)} ></input>
@@ -175,8 +182,33 @@ class F2 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      line1: '',
+      line2: '',
+      city: '',
+      state: '',
+      zipcode: '',
+      phoneNumber:''
 
     }
+  }
+
+  clickForm2NextBtn(e) {
+   let id =this.props.cur_id;
+    let form2Data = {
+      line1: this.state.line1,
+      line2: this.state.line2,
+      city: this.state.city,
+      state: this.state.state,
+      zipcode: this.state.zipcode,
+      phoneNumber: this.state.phoneNumber,
+      id: id
+    };
+    axios.put(`/api/shipping-info/:${id}`, form2Data)
+    .then(response => {
+      console.log('Sucess add billing info!');
+      this.props.toggleF2F3();
+    }).catch (err => {console.log('Err add billing info!', err)})
+
   }
 
   render() {
@@ -185,16 +217,16 @@ class F2 extends React.Component {
         <h3>Form 2: Shipping Info</h3>
         <form>
           <label>Address</label>
-          <input placeholder="line1..."></input>
-          <input placeholder="line2..."></input>
-          <input placeholder="City"></input>
-          <input placeholder="State"></input>
-          <input placeholder="Zipcode"></input>
+          <input placeholder="line1..." onChange={e => this.setState({line1: e.target.value})}></input>
+          <input placeholder="line2..." onChange={e => this.setState({line2: e.target.value})}></input>
+          <input placeholder="City" onChange={e => this.setState({city: e.target.value})}></input>
+          <input placeholder="State" onChange={e => this.setState({state: e.target.value})}></input>
+          <input placeholder="Zipcode" onChange={e => this.setState({zipcode: e.target.value})}></input>
           <br />
-          <label>Phone number</label>
-          <input></input>
+          <label >Phone number</label>
+          <input onChange={e => this.setState({phoneNumber: e.target.value})}></input>
         </form>
-        <button>Next</button>
+        <button onClick={this.clickForm2NextBtn.bind(this)}>Next</button>
       </div>
     )
   }
@@ -205,7 +237,10 @@ class F3 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      creditCardNumber:'',
+      expiryDate: null,
+      cvv:'',
+      billingZip:''
     }
   }
 
@@ -222,7 +257,7 @@ class F3 extends React.Component {
           <label>CVV </label>
           <input></input>
           <br />
-          <label>Billing Address </label>
+          <label>Billing Zipcode </label>
           <input></input>
         </form>
         <button>Next</button>

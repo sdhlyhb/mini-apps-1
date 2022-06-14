@@ -9,6 +9,8 @@ CREATE TABLE orderInfo (
   username VARCHAR(255) ,
   email VARCHAR(255) ,
   password VARCHAR(255) ,
+  line1 VARCHAR(255),
+  line2 VARCHAR(255),
   city VARCHAR(255),
   state VARCHAR(255),
   zipcode VARCHAR(255),
