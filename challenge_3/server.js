@@ -77,6 +77,22 @@ app.put('/api/billing-info/:id', (req, res) => {
 })
 
 
+app.get('/api/order-summary/:id', (req, res) => {
+  console.log('This is req.body for Get order-summary:', req.body);
+  console.log('This is req.params for Get order-summary:', req.params); // eg:':12'
+  let id = Number(req.params.id.slice(1));
+  db.getOrderInfoById(id, (err, response) => {
+    if(err) {
+      console.log('Err Getting order summary', err);
+      res.status(500).send(err);
+    } else {
+      console.log('Sucess Getting order Summary!');
+      res.status(200).send(response);
+    }
+  })
+})
+
+
 
 
 

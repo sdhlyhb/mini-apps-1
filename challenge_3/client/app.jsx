@@ -59,6 +59,14 @@ class App extends React.Component {
     })
   }
 
+  purchaseCompleteBackToHomePage() {
+    this.setState({
+
+      summarySeen:false,
+      f1Seen:true
+    })
+  }
+
 
 
 
@@ -92,7 +100,11 @@ class App extends React.Component {
 
 
         /> : null}
-        {this.state.summarySeen ? <Comfirmation /> : null}
+        {this.state.summarySeen ? <Comfirmation
+          cur_id = {this.state.current_id}
+          completePurchase = {this.purchaseCompleteBackToHomePage.bind(this)}
+
+        /> : null}
       </div>
     )
   }
@@ -313,23 +325,60 @@ class Comfirmation extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      username:'',
+      email: '',
+      password: '',
+      address: '',
+      phoneNumber: '',
+      creditCardNumber: '',
+      cvv: '',
+      billingZip: ''
     }
   }
+
+  componentDidMount() {
+    this.displayCurOrderSummary();
+
+  }
+
+  displayCurOrderSummary() {
+    let id = this.props.cur_id
+    axios.get(`/api/order-summary/:${id}`, {data: {id: id}})
+      .then(orderData => {
+        console.log("sucess getting order data!", orderData.data);
+        this.setState({
+          username: orderData.data[0].username,
+          email: orderData.data[0].email,
+          password: orderData.data[0].password,
+          address: orderData.data[0].line1 + ' ' + orderData.data[0].line2
+                    + ', ' + orderData.data[0].city + ', ' + orderData.data[0].state
+                    + ', ' + orderData.data[0].zipcode,
+          phoneNumber: orderData.data[0].phoneNumber,
+          creditCardNumber: orderData.data[0].creditCardNumber,
+          expiryDate: orderData.data[0].expiryDate,
+          cvv: orderData.data[0].cvv,
+          billingZip: orderData.data[0].billingZip
+
+        })
+      })
+  }
+
+
 
   render() {
     return (
       <div>
         <h3>Please confirm your order information</h3>
-        <div>Username: </div>
-        <div>Email: </div>
-        <div>Password: </div>
-        <div>Address: </div>
-        <div>Phone Number: </div>
-        <div>Credit Card #: </div>
-        <div>CVV </div>
-        <div>Billing Address </div>
-        <button>Purchase</button>
+        <div>Username: {this.state.username} </div>
+        <div>Email:  {this.state.email} </div>
+        <div>Password: {this.state.password} </div>
+        <div>Address:  {this.state.address}</div>
+        <div>Phone Number:  {this.state.phoneNumber}</div>
+        <div>Credit Card #:  {this.state.creditCardNumber}</div>
+        <div>Expiry Date:  {this.state.expiryDate}</div>
+        <div>CVV: {this.state.cvv}</div>
+        <div>Billing Zipcode:  {this.state.billingZip}</div>
+        <button onClick={this.props.completePurchase.bind(this)}>Purchase </button>
 
 
 
