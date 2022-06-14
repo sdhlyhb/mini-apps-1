@@ -2,6 +2,7 @@
 // import ReactDOM from 'react-dom';
 //not sure why import React and ReactDOM is not working. Add to index.html in script tag will work.
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -10,7 +11,10 @@ class App extends React.Component {
       f1Seen: false,
       f2Seen: false,
       f3Seen: false,
-      confirmationSeen: false
+      summarySeen: false,
+      confirmationSeen: false,
+      current_id: null
+
 
 
     }
@@ -18,12 +22,53 @@ class App extends React.Component {
   }
 
   //functions;
+
+
+
+
+
+
+// check out btn disappear, form 1 display and start an order record (get the record id in the db table)
   clickCheckOutBtn(e) {
+    axios.post('/api/createId', {})
+      .then(response => {
+        console.log('this is the data after click:', response);
+        let id = response.data.insertId;
+        this.setState({
+          current_id: id,
+          homeDisplay: "none",
+          f1Seen:true
+        })
+
+      }).catch(err => {
+        console.log('Err getting data from API', err);
+      })
+
+  }
+
+  hideF1ShowF2() {
     this.setState({
-      homeDisplay: "none",
-      f1Seen:true
+      f1Seen: false,
+      f2Seen:true
     })
   }
+
+  hideF2ShowF3() {
+    this.setState({
+      f2Seen: false,
+      f3Seen:true
+    })
+  }
+
+  hideF3ShowSummary() {
+    this.setState({
+      f3Seen: false,
+      summarySeen:true
+    })
+  }
+
+
+
 
 
 
@@ -39,7 +84,12 @@ class App extends React.Component {
           onClick={this.clickCheckOutBtn.bind(this)}>Check Out</button>
         </div>
 
-        {this.state.f1Seen? <F1 /> : null}
+        {this.state.f1Seen? <F1
+        cur_id = {this.state.current_id}
+        toggleF1F2 = {this.hideF1ShowF2.bind(this)}
+
+
+        /> : null}
         {this.state.f2Seen? <F2 /> : null}
         {this.state.f3Seen? <F3 /> : null}
         {this.state.confirmationSeen? <Comfirmation /> : null}
@@ -55,8 +105,45 @@ class F1 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      username: '',
+      email: '',
+      password: ''
 
     }
+  }
+
+  onChangeName(e) {
+    this.setState({
+      username: e.target.value
+    });
+  }
+
+  onChangeEmail(e) {
+    this.setState({
+      email: e.target.value
+    })
+  }
+
+  onChangePassword(e) {
+    this.setState({
+      password: e.target.value
+    })
+  }
+  //save form1 data to db, form1 disappear, form2 display
+  clickForm1NextBtn(e) {
+    let id =this.props.cur_id;
+    let form1Data = {
+      username: this.state.username,
+      email: this.state.email,
+      password: this.state.password,
+      id: id
+    };
+    axios.put(`/api/user-account-info/:${id}`, form1Data)
+      .then(response => {
+        console.log('Sucess add user account info!');
+        this.props.toggleF1F2();
+      }).catch (err => {console.log('Err add user account info!', err)})
+
   }
 
   render() {
@@ -65,19 +152,24 @@ class F1 extends React.Component {
         <h3>Form 1: User Account Info</h3>
         <form>
           <label>Username:</label>
-          <input></input>
+          <input onChange = {this.onChangeName.bind(this)} ></input>
           <br />
           <label>Email:</label>
-          <input></input>
+          <input onChange = {this.onChangeEmail.bind(this)} ></input>
           <br />
           <label>Password:</label>
-          <input></input>
+          <input onChange = {this.onChangePassword.bind(this)} ></input>
         </form>
-        <button>Next</button>
+        <button onClick = {this.clickForm1NextBtn.bind(this)}>Next</button>
       </div>
     )
   }
 }
+
+
+
+
+
 
 class F2 extends React.Component {
   constructor(props) {

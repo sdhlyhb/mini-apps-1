@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 
 })
 
-//this will send back the id (data.insertId) of the generated record;
+//this will send back data containing the id (data.insertId) of the generated record;
 app.post('/api/createId', (req, res) => {
   db.createNewRecord((err, data) => {
     if(err) {
@@ -29,9 +29,24 @@ app.post('/api/createId', (req, res) => {
     }
   })
 
+})
 
+app.put('/api/user-account-info/:id', (req, res) => {
+  console.log('this is req.body for post user-account-info:', req.body);
+  let form1Data = req.body;
+  db.saveFrom1Data(form1Data, (err, response) => {
+    if(err) {
+      console.log('Err POST', err);
+      res.status(500).send(err);
+    } else {
+      console.log('Sucess saved!', response);
+      res.status(200).send('Sucess!');
+    }
+  })
 
 })
+
+
 
 
 

@@ -20,22 +20,38 @@ connection.connect(err => {
 
 let createNewRecord = (callback) => {
   let queryString = `INSERT INTO orderInfo VALUES ();`;
-  connection.query(queryString, (err, id) => {
+  connection.query(queryString, (err, idData) => {
     if(err) {
       console.log('Err Create the record!', err);
       callback(err, null);
     } else {
-      callback(null, id);
+      callback(null, idData);
     }
   })
 
 }
 
-// let saveFrom1Data = (username, email, password) => {
+let saveFrom1Data = (form1Data, callback) => {
+  let username = form1Data.username;
+  let email = form1Data.email;
+  let password = form1Data.password;
+  let id = form1Data.id;
+
+  let queryString = `UPDATE orderInfo SET username = "${username}", email = "${email}", password = "${password}" WHERE id = ${id};`;
+
+  connection.query(queryString, (err, result) => {
+    if(err) {
+      console.log('Err save form1 data to db:', err);
+      callback(err, null);
+    } else {
+      console.log('Sucess save form1 data to db!');
+      callback(null, result);
+    }
+  })
 
 
 
-// };
+};
 
 // let saveFrom2Data = () => {
 
@@ -65,7 +81,8 @@ let getOrderInfoById = (id, callback) => {
 
 module.exports = {
   createNewRecord,
-  getOrderInfoById
+  getOrderInfoById,
+  saveFrom1Data
 
 };
 
