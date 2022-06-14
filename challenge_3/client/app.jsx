@@ -68,7 +68,7 @@ class App extends React.Component {
 
   render() {
     return(
-      <div class="container">
+      <div className="container">
         <h1>Check out forms</h1>
         <div className="Home" style={{display: this.state.homeDisplay}}>
           <h2>Click if you are ready to check out!</h2>
@@ -92,7 +92,7 @@ class App extends React.Component {
 
 
         /> : null}
-        {this.state.confirmationSeen ? <Comfirmation /> : null}
+        {this.state.summarySeen ? <Comfirmation /> : null}
       </div>
     )
   }
@@ -263,7 +263,7 @@ class F3 extends React.Component {
         <h3>Form 3: Billing Info</h3>
         <form>
           <label>Credit card #</label>
-          <input placeholder="Your credit card # here..."></input>
+          <input  placeholder="Your credit card # here..."  onChange={e => this.setState({ creditCardNumber: e.target.value })}></input>
           <br />
           <br />
           <label>Expiration Date</label>
@@ -286,18 +286,18 @@ class F3 extends React.Component {
           </select>
 
           <label>Year</label>
-          <input placeholder="yyyy format"></input>
+          <input id="exp-year" placeholder="yyyy format" onChange={e => this.setState({year: e.target.value})}></input>
 
 
 
           <br />
           <label>CVV </label>
-          <input></input>
+          <input id="cvv" onChange={e => this.setState({cvv: e.target.value})}></input>
           <br />
           <label>Billing Zipcode </label>
-          <input></input>
+          <input id="billingZip" onChange={e => this.setState({billingZip: e.target.value})}></input>
         </form>
-        <button>Next</button>
+        <button onClick={this.clickForm3NextBtn.bind(this)}>Next</button>
       </div>
     )
   }
