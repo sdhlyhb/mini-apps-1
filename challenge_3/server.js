@@ -64,7 +64,7 @@ app.put('/api/shipping-info/:id', (req, res) => {
 app.put('/api/billing-info/:id', (req, res) => {
   console.log('this is req.body for post billing-info:', req.body);
   let form3Data = req.body;
-  db.saveForm3Data(form2Data, (err, response) => {
+  db.saveForm3Data(form3Data, (err, response) => {
     if(err) {
       console.log('Err POST', err);
       res.status(500).send(err);

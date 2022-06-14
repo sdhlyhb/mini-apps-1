@@ -75,18 +75,18 @@ let saveForm2Data = (form2Data, callback) => {
 
 };
 
-let saveForm3Data = (form2Data, callback) => {
+let saveForm3Data = (form3Data, callback) => {
   let creditCardNumber = form3Data.creditCardNumber;
   let expiryDate =form3Data.expiryDate;
   let cvv = form3Data.cvv;
   let billingZip = form3Data.billingZip;
 
 
-  let queryString = `UPDATE orderInfo SET creditCardNumber = "${creditCardNumber}", expiryDate = "${expiryDate}", cvv = "${cvv}", billingZip = "${billingZip} WHERE id = ${id};`;
+  let queryString = `UPDATE orderInfo SET creditCardNumber = "${creditCardNumber}", expiryDate = "${expiryDate}", cvv = "${cvv}", billingZip = "${billingZip}" WHERE id = ${id};`;
 
   connection.query(queryString, (err, result) => {
     if(err) {
-      console.log('Err save form2 data to db:', err);
+      console.log('Err save form3 data to db:', err);
       callback(err, null);
     } else {
       console.log('Sucess save form3 data to db!');

@@ -68,7 +68,7 @@ class App extends React.Component {
 
   render() {
     return(
-      <div>
+      <div class="container">
         <h1>Check out forms</h1>
         <div className="Home" style={{display: this.state.homeDisplay}}>
           <h2>Click if you are ready to check out!</h2>
@@ -198,9 +198,9 @@ class F2 extends React.Component {
     };
     axios.put(`/api/shipping-info/:${id}`, form2Data)
     .then(response => {
-      console.log('Sucess add billing info!');
+      console.log('Sucess add shipping info!');
       this.props.toggleF2F3();
-    }).catch (err => {console.log('Err add billing info!', err)})
+    }).catch (err => {console.log('Err add shipping info!', err)})
 
   }
 
@@ -230,12 +230,32 @@ class F3 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      month: 10, //random default value
+      year: '',  //random default value
       creditCardNumber:'',
-      expiryDate: null,
       cvv:'',
       billingZip:''
     }
   }
+
+  clickForm3NextBtn(e) {
+    let id =this.props.cur_id;
+     let form3Data = {
+      creditCardNumber: this.state.creditCardNumber,
+      expiryDate: this.state.month + '/' + this.state.year,
+      cvv: this.state.cvv,
+      billingZip:this.state.billingZip,
+      id: id
+     };
+     axios.put(`/api/billing-info/:${id}`, form3Data)
+     .then(response => {
+       console.log('Sucess add billing info!');
+       this.props.toggleF3Summary();
+     }).catch (err => {console.log('Err add billing info!', err)})
+
+   }
+
+
 
   render() {
     return (
@@ -245,9 +265,31 @@ class F3 extends React.Component {
           <label>Credit card #</label>
           <input placeholder="Your credit card # here..."></input>
           <br />
+          <br />
           <label>Expiration Date</label>
-          <input placeholder="Month"></input>
-          <input placeholder="Year"></input>
+          <label>Month</label>
+
+          <select value={this.state.month} onChange={e => this.setState({ month: e.target.value })}>
+            <option name="01">01</option>
+            <option name="02">02</option>
+            <option name="03">03</option>
+            <option name="04">04</option>
+            <option name="05">05</option>
+            <option name="06">06</option>
+            <option name="07">07</option>
+            <option name="08">08</option>
+            <option name="09">09</option>
+            <option name="10">10</option>
+            <option name="11">11</option>
+            <option name="12">12</option>
+
+          </select>
+
+          <label>Year</label>
+          <input placeholder="yyyy format"></input>
+
+
+
           <br />
           <label>CVV </label>
           <input></input>
@@ -260,6 +302,12 @@ class F3 extends React.Component {
     )
   }
 };
+
+
+
+
+
+
 
 class Comfirmation extends React.Component {
   constructor(props) {

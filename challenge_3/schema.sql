@@ -16,7 +16,7 @@ CREATE TABLE orderInfo (
   zipcode VARCHAR(255),
   phoneNumber VARCHAR(255),
   creditCardNumber VARCHAR(255),
-  expiryDate DATE,
+  expiryDate VARCHAR(255),
   cvv VARCHAR(255) ,
   billingZip VARCHAR(255) ,
 
