@@ -20,13 +20,6 @@ class App extends React.Component {
 
   }
 
-  //functions;
-
-
-
-
-
-
 // check out btn disappear, form 1 display and start an order record (get the record id in the db table)
   clickCheckOutBtn(e) {
     axios.post('/api/createId', {})
@@ -251,8 +244,10 @@ class F3 extends React.Component {
         <form>
           <label>Credit card #</label>
           <input placeholder="Your credit card # here..."></input>
+          <br />
           <label>Expiration Date</label>
-          <input></input>
+          <input placeholder="Month"></input>
+          <input placeholder="Year"></input>
           <br />
           <label>CVV </label>
           <input></input>
