@@ -7,12 +7,12 @@ const Board = (props) => {
     <div>
       <table>
         <tbody>
-          <Row />
-          <Row />
-          <Row />
-          <Row />
-          <Row />
-          <Row />
+          <Row y={0} />
+          <Row y={1} />
+          <Row y={2} />
+          <Row y={3} />
+          <Row y={4} />
+          <Row y={5} />
 
 
 
