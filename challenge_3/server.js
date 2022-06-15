@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-  console.log('this is the req.body:', req.body);
+
 
     res.status(200).sendFile(path.join(__dirname, '/public/index.html'));
 
