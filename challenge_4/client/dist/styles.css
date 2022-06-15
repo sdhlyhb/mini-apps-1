@@ -1,3 +1,37 @@
 body {
   background-color: beige;
 }
+
+.row {
+  height: 70px;
+  width: 500px;
+  /* background-color: #1990ff; */
+  border-color: black;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.cell {
+  height: 70px;
+  width: 70px;
+  background-color: #1990ff;
+  border-color: black;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+table {
+  margin: 0 auto;
+  border-spacing: 0px 0px;
+  border-color: black;
+}
+table, th, td {
+  border: 1px solid black;
+  border-radius: 40px;
+}
