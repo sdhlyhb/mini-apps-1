@@ -17,7 +17,7 @@ body {
 .cell {
   height: 70px;
   width: 70px;
-  background-color: #1990ff;
+  background-color: lightblue;
   border-color: black;
   display: flex;
   flex-direction: row;
@@ -32,6 +32,6 @@ table {
   border-color: black;
 }
 table, th, td {
-  border: 1px solid black;
+  border: 2px solid black;
   border-radius: 40px;
 }

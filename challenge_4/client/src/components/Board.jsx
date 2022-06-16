@@ -7,12 +7,12 @@ const Board = (props) => {
     <div>
       <table>
         <tbody>
-          <Row y={0} />
-          <Row y={1} />
-          <Row y={2} />
-          <Row y={3} />
-          <Row y={4} />
-          <Row y={5} />
+          <Row y={0} makeMove = {props.makeMove} currentPlayer= {props.currentPlayer} curBoard={props.curBoard}/>
+          <Row y={1} makeMove = {props.makeMove} currentPlayer= {props.currentPlayer} curBoard={props.curBoard}/>
+          <Row y={2} makeMove = {props.makeMove} currentPlayer= {props.currentPlayer} curBoard={props.curBoard}/>
+          <Row y={3} makeMove = {props.makeMove} currentPlayer= {props.currentPlayer} curBoard={props.curBoard}/>
+          <Row y={4} makeMove = {props.makeMove} currentPlayer= {props.currentPlayer} curBoard={props.curBoard}/>
+          <Row y={5} makeMove = {props.makeMove} currentPlayer= {props.currentPlayer} curBoard={props.curBoard}/>
 
 
 
