@@ -70,8 +70,30 @@ class App extends React.Component {
         }
       }
       this.setState({ board: curBoard });
+      let res = this.checkWinner(this.state.board);
+      if (res === 1) {
+        this.setState({
+          gameOver: true,
+          message: 'The winner is player1!'
+        })
+      } else if (res === 2) {
+        this.setState({
+          gameOver: true,
+          message: 'The winner is player2!'
+        })
+      } else if (res === 3) {
+        this.setState({
+          gameOver: true,
+          message: 'Boad is full, it is a Tie!'
+        })
 
-      this.togglePlayer();
+
+      } else {
+
+        this.togglePlayer();
+      }
+
+
     } else {
       this.setState({
         message: 'Game Over! No More Moves!'
@@ -81,27 +103,86 @@ class App extends React.Component {
 
   }
 
-  checkWinner() {
+  checkWinner(board) {
+    return this.checkVertical(board) || this.checkHorizontal(board) || this.checkDiag1(board) || this.checkDiag2(board) || this.checkBoardFull(board)
 
   }
 
-  checkVertical() {
+  checkVertical(board) {
+    for(let row = 3; row < 6; row++) {
+      for(let col = 0; col < 7; col++) {
+        if(board[row][col] !==null) {
+          if(board[row][col] === board[row - 1][col] &&
+            board[row][col] === board[row - 2][col] &&
+            board[row][col] === board[row - 3][col]
+            ) {
+              return board[row][col]; //return 1 or 2 to indicate which play is winner;
+            }
+        }
+      }
+    }
 
   }
 
-  checkHorizontal() {
+  checkHorizontal(board) {
+    for (let row = 0; row < 6; row++) {
+      for (let col = 0; col < 4; col++) {
+        if (board[row][col]) {
+          if (board[row][col] === board[row][col + 1] &&
+              board[row][col] === board[row][col + 2] &&
+              board[row][col] === board[row][col + 3]) {
+            return board[row][col];
+          }
+        }
+      }
+    }
+  }
+
+
+
+  checkDiag1(board) {
+    for (let row = 3; row < 6; row++) {
+      for (let col = 0; col < 4; col++) {
+        if (board[row][col]) {
+          if (board[row][col] === board[row - 1][col + 1] &&
+              board[row][col] === board[row - 2][col + 2] &&
+              board[row][col] === board[row - 3][col + 3]) {
+            return board[row][col];
+          }
+        }
+      }
+    }
+  }
+
+
+
+  checkDiag2(board) {
+    for (let row = 3; row < 6; row++) {
+      for (let col = 3; col < 7; col++) {
+        if (board[row][col]) {
+          if (board[row][col] === board[row - 1][col - 1] &&
+              board[row][col] === board[row - 2][col - 2] &&
+              board[row][col] === board[row - 3][col - 3]) {
+            return board[row][col];
+          }
+        }
+      }
+    }
 
   }
 
-  checkDiag1() {
+  //if the board is full and no winner
+  checkBoardFull(board) {
 
-  }
+    for(let row = 0; row < 6; row++) {
+      for(let col = 0; col < 7; col++) {
+        if(board[row][col] === null) {
+          return null;
+        }
+      }
+      return 3;
+    }
 
-  checkDiag2() {
-
-  }
-
-  checkTie() {
 
   }
 
