@@ -85,6 +85,30 @@ class App extends React.Component {
 
   }
 
+  checkVertical() {
+
+  }
+
+  checkHorizontal() {
+
+  }
+
+  checkDiag1() {
+
+  }
+
+  checkDiag2() {
+
+  }
+
+  checkTie() {
+
+  }
+
+  resetGame() {
+    this.emptyBoard();
+  }
+
 
 
 
@@ -111,7 +135,7 @@ class App extends React.Component {
 
         />
 
-        <button>Start New Game</button>
+        <button onClick={this.resetGame.bind(this)}>Start New Game</button>
         <div id="msg">
           {this.state.message}
           <br />
