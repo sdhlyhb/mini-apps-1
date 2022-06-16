@@ -17,7 +17,7 @@ class App extends React.Component {
         [null, null, null, null, null, null, null],
         [null, null, null, null, null, null, null],
       ],
-      hasWinner: false,
+      gameOver: false,
       message: 'no winner yet!'
 
     }
@@ -42,7 +42,7 @@ class App extends React.Component {
         [null, null, null, null, null, null, null],
         [null, null, null, null, null, null, null],
       ],
-      hasWinner: false,
+      gameOver: false,
       message: 'no winner yet!'
     });
   }
@@ -60,18 +60,29 @@ class App extends React.Component {
   }
 
   makeMove(colIndex, curBoard) {
+    if (!this.state.gameOver) {
+      for (var rowIndex = 5; rowIndex >= 0; rowIndex--) {
+        if (curBoard[rowIndex][colIndex] === null) {
+          curBoard[rowIndex][colIndex] = this.state.currentPlayer;
 
-    for(var rowIndex = 5; rowIndex >=0; rowIndex--) {
-      if(curBoard[rowIndex][colIndex] === null) {
-        curBoard[rowIndex][colIndex] = this.state.currentPlayer;
+          break;
 
-        break;
-
+        }
       }
-    }
-    this.setState({board: curBoard});
+      this.setState({ board: curBoard });
 
-    this.togglePlayer();
+      this.togglePlayer();
+    } else {
+      this.setState({
+        message: 'Game Over! No More Moves!'
+      })
+    }
+
+
+  }
+
+  checkWinner() {
+
   }
 
 

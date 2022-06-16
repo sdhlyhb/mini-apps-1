@@ -6,12 +6,13 @@ const Cell = (props) => {
 
 
       <td className="cell" id={props.x + "-" + props.y} onClick = {e => {
-        let x = Number(e.currentTarget.id.split('-')[0]);
-        let y = Number(e.currentTarget.id.split('-')[1]);
+        let x = Number(e.currentTarget.id.split('-')[0]); //col index;
+        let y = Number(e.currentTarget.id.split('-')[1]); //row index;
         props.makeMove1(x, props.curBoard);
 
+
       } }>
-        {'r:' + props.y + ',' + 'c:' + props.x}
+        {props.curBoard[props.y][props.x]}
 
       </td>
     )
