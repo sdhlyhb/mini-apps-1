@@ -1,6 +1,8 @@
 import React from 'react';
 
 const Cell = (props) => {
+  let curValue = props.curBoard[props.y][props.x];
+
 
   return(
 
@@ -11,8 +13,12 @@ const Cell = (props) => {
         props.makeMove1(x, props.curBoard);
 
 
-      } }>
-        {props.curBoard[props.y][props.x]}
+      } }
+      style={{ background: curValue === 2 ? "yellow" : curValue === 1 ? "red" : "lightblue" }}
+
+
+      >
+        {curValue}
 
       </td>
     )
