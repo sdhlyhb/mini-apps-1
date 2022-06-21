@@ -119,7 +119,7 @@ function checkWinner(board) {
   }
 
   if(checkDraw === 3) {
-    return 'it is a draw!';
+    return 'it is a tie!';
   }
 
 
@@ -129,7 +129,7 @@ function checkWinner(board) {
 describe('Connect Game Four test', function () {
 
   describe('Connect 4 Winning logics', function(){
-    it('should find which player wins vertically', function() {
+    it('should find which player wins vertically: case1', function() {
       let board = [
         [null, null, null, null, null, null, null],
         [null, null, null, 1, null, 2, null],
@@ -142,6 +142,125 @@ describe('Connect Game Four test', function () {
       expect(checkWinner(board)).to.equal("Player2 Wins Vertically!");
     });
 
+    it('should find which player wins vertically: case2', function() {
+      let board = [
+        [null, null, null, null, null, null, 2],
+        [null, null, null, 1, 1, null, null],
+        [null, null, null, null, 1, 2, null],
+        [null, null, null, null, 1, 2, null],
+        [null, null, null, null, 1, 2, null],
+        [null, null, null, null, null, null, null],
+
+      ];
+      expect(checkWinner(board)).to.equal("Player1 Wins Vertically!");
+    });
+
+    it('should find which player wins horizontally: case1', function() {
+      let board = [
+        [null, null, null, null, null, null, null],
+        [null, 1, 1, 1, 1, null, null],
+        [null, null, null, null, null, 2, null],
+        [null, null, null, null, null, 2, null],
+        [null, null, null, null, null, 2, null],
+        [null, null, null, null, null, null, null],
+
+      ];
+      expect(checkWinner(board)).to.equal("Player1 Wins Horizontally!");
+    });
+
+    it('should find which player wins horizontally: case2', function() {
+      let board = [
+        [null, null, null, null, null, null, null],
+        [null, 2, 2, 2, 2, null, null],
+        [null, null, null, null, null, 1, null],
+        [null, null, null, null, null, 1, null],
+        [null, null, null, null, null, 1, null],
+        [null, null, null, null, null, null, 1],
+
+      ];
+      expect(checkWinner(board)).to.equal("Player2 Wins Horizontally!");
+    });
+
+    it('should find which player wins in major diagonal or minor diagonal: case1', function() {
+      let board = [
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, 1, null, null, null, null, null],
+        [null, null, 1, null, null, null, null],
+        [null, null, null, 1, null, null, null],
+        [null, null, null, 2, 1, 2, 2],
+
+      ];
+      expect(checkWinner(board)).to.equal("Player1 Wins Diagonally!");
+    });
+
+    it('should find which player wins in major diagonal or minor diagonal: case2', function() {
+      let board = [
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, 1, null],
+        [null, null, null, null, 1, null, null],
+        [null, null, null, 1, null, null, null],
+        [null, 2, 1, 2, 1, 2, 2],
+
+      ];
+      expect(checkWinner(board)).to.equal("Player1 Wins Diagonally!");
+    });
+
+    it('should find which player wins in major diagonal or minor diagonal: case3', function() {
+      let board = [
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, 2, null],
+        [null, null, null, null,2, null, null],
+        [null, null, null, 2, null, null, null],
+        [1, 1, 2, 1, 1, 1, null],
+
+      ];
+      expect(checkWinner(board)).to.equal("Player2 Wins Diagonally!");
+    });
+
+
+    it('should find which player wins in major diagonal or minor diagonal: case3', function() {
+      let board = [
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, 2, null, null, null, null, null],
+        [null, null, 2, null,null, null, null],
+        [null, null, null, 2, null, null, null],
+        [1, 1, null, 1, 2, 1, 1],
+
+      ];
+      expect(checkWinner(board)).to.equal("Player2 Wins Diagonally!");
+    });
+
+    it('should find which player wins in major diagonal or minor diagonal: case4', function() {
+      let board = [
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, 2, null],
+        [null, null, null, null,2, null, null],
+        [null, null, null, 2, null, null, null],
+        [1, 1, 2, 1, null, 1, 1],
+
+      ];
+      expect(checkWinner(board)).to.equal("Player2 Wins Diagonally!");
+    });
+
+
+    it('should check results when the game is a tie', function() {
+      let board = [
+        [2, 2, 2, 1, 2, 1, 2],
+        [1, 1, 1, 2, 1, 2, 1],
+        [2, 2, 1, 2, 1, 2, 2],
+        [1, 1, 2, 1, 2, 1, 1],
+        [2, 1, 2, 1, 2, 1, 2],
+        [1, 2, 1, 2, 1, 2, 1],
+
+      ];
+      expect(checkWinner(board)).to.equal('it is a tie!');
+    });
+
 
 
 
@@ -151,4 +270,4 @@ describe('Connect Game Four test', function () {
 
 
 
-}
+})
