@@ -8,6 +8,7 @@
     "webpack-cli": "^4.10.0"
   },
   "scripts": {
+    "test": "mocha test/testSpec.js --bail",
     "start": "nodemon server.js",
     "build": "webpack --config webpack.config.js",
     "react-dev": "webpack --mode development --watch"
@@ -24,6 +25,7 @@
     "browserslist": "^4.20.4",
     "buffer-from": "^1.1.2",
     "caniuse-lite": "^1.0.30001352",
+    "chai": "^4.3.6",
     "chrome-trace-event": "^1.0.3",
     "clone-deep": "^4.0.1",
     "colorette": "^2.0.19",
