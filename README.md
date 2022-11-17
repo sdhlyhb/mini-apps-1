@@ -1,5 +1,11 @@
 # mini-apps-1
 This is a project I completed as a student at [hackreactor](http://hackreactor.com). This project was a solo project.
 
-## Tic Tac Toe & CSV Generator DEMO:
-[![demo](https://res.cloudinary.com/marcomontalbano/image/upload/v1668712845/video_to_markdown/images/google-drive--1eBHAJMr6n3tbzVQFSFMVSlz-Tr3Z57Nj-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://drive.google.com/file/d/1eBHAJMr6n3tbzVQFSFMVSlz-Tr3Z57Nj/view?usp=share_link "demo")
+## DEMO:
+
+### Tic Tac Toe
+![TicTacToeDemo](https://user-images.githubusercontent.com/8715043/202544547-1f3e3bd2-7bb5-4702-85c5-48f850fe6fe0.gif)
+
+
+### CSV Generator
+![CSVGenteratorDemo](https://user-images.githubusercontent.com/8715043/202546137-e9a84b41-b547-4e84-9dda-1b1907d733d3.gif)
